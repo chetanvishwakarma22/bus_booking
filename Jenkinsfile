@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'slave1' }
 
     environment {
         JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
@@ -77,7 +77,7 @@ pipeline {
         stage('Wait for 5 minutes') {
             steps {
                 echo 'Waiting for 5 minutes...'
-                sleep(time: 2, unit: 'MINUTES')  // Wait for 5 minutes
+                sleep(time: 1, unit: 'MINUTES')  // Wait for 5 minutes
             }
         }
 
