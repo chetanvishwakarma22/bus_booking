@@ -40,7 +40,7 @@ pipeline {
         stage('Upload Artifact') {
             steps {
                 echo 'Uploading artifact...'
-                archiveArtifacts artifacts: 'target/simple-parcel-service-app-1.0-SNAPSHOT.jar', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'target/bus-booking-app-1.0-SNAPSHOT.war', allowEmptyArchive: true
             }
         }
 
