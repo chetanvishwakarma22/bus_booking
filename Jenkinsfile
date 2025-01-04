@@ -75,7 +75,6 @@ stage('Gracefully Stop Spring Boot App')
                   pipeline.stopApplication()
             }
 			    }
-        }
 post {
         always {
             cleanup()
@@ -83,4 +82,3 @@ post {
     }
 }
 
-}
