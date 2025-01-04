@@ -9,60 +9,77 @@ pipeline {
         PATH = "${JAVA_HOME}/bin:${MAVEN_HOME}/bin:${env.PATH}"
     }
 
-    stages {
-        stage('Checkout Code') {
+stages { 	
+
+stage('Checkout Code') 
+		{
             steps {
-                checkoutCode()
+                script {
+				pipeline.checkoutCode()
             }
+		         }
         }
 
-        stage('Set up Java 17') {
-            steps {
-                setupJava()
+stage('Set up Java 17') 
+		{
+                steps {
+				  script {
+                  pipeline.setupJava()
             }
+			     }
         }
-
-        stage('Set up Maven') {
-            steps {
-                setupMaven()
+stage('Set up Maven') 
+			{
+                steps {
+				  script {
+                  pipeline.setupMaven()
             }
+			    }
         }
-
-        stage('Build with Maven') {
+stage('Build with Maven') 
+       {
             steps {
-                buildProject()
+			script {
+                pipeline.buildProject()
             }
+			      }    
         }
-
-        stage('Upload Artifact') {
-            steps {
-                echo 'Uploading artifact...'
-                archiveArtifacts artifacts: 'target/bus-booking-app-1.0-SNAPSHOT.war', allowEmptyArchive: true
+stage('Upload Artifact') 
+			{
+                steps {
+				   script {
+                   pipeline.uploadArtifact('target/bus-booking-app-1.0-SNAPSHOT.jar')
             }
+			    }
         }
-
-        stage('Run Application') {
-            steps {
-                runApplication()
+stage('Run Application') 
+			{
+                steps {
+				  script {
+                  pipeline.runApplication()
             }
+			     }
         }
-
-        stage('Validate App is Running') {
-            steps {
-                validateApp()
+stage('Validate App is Running') 
+			{
+                steps {
+				  script {
+                  pipeline.validateApp()
             }
+			    }
         }
-
-        stage('Gracefully Stop Spring Boot App') {
-            steps {
-                stopApplication()
+stage('Gracefully Stop Spring Boot App') 
+			{
+                steps {
+				  script {
+                  pipeline.stopApplication()
             }
+			    }
         }
-    }
-
-    post {
+post {
         always {
             cleanup()
         }
     }
 }
+
