@@ -1,4 +1,4 @@
- @Library('my-shared-library@main') _
+@Library('my-shared-library@main') _
 
 pipeline {
     agent { label 'slave1' }
@@ -9,16 +9,58 @@ pipeline {
         PATH = "${JAVA_HOME}/bin:${MAVEN_HOME}/bin:${env.PATH}"
     }
 
-stages {
-      stage('pipeline') 
-		{
+    stages {
+        stage('Checkout Code') {
             steps {
-                pipeline()
+                checkoutCode()
             }
-		         }
         }
-		
-post {
+
+        stage('Set up Java 17') {
+            steps {
+                setupJava()
+            }
+        }
+
+        stage('Set up Maven') {
+            steps {
+                setupMaven()
+            }
+        }
+
+        stage('Build with Maven') {
+            steps {
+                buildProject()
+            }
+        }
+
+        stage('Upload Artifact') {
+            steps {
+                echo 'Uploading artifact...'
+                archiveArtifacts artifacts: 'target/bus-booking-app-1.0-SNAPSHOT.war', allowEmptyArchive: true
+            }
+        }
+
+        stage('Run Application') {
+            steps {
+                runApplication()
+            }
+        }
+
+        stage('Validate App is Running') {
+            steps {
+                validateApp()
+            }
+        }
+
+        stage('Gracefully Stop Spring Boot App') {
+            steps {
+                stopApplication()
+            }
+        }
+    }
+
+    post {
         always {
             cleanup()
         }
