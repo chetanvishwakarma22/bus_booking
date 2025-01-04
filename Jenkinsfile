@@ -74,6 +74,8 @@ stage('Gracefully Stop Spring Boot App')
             }
 		}
         }
+stage(  )
+	{
 post {
         always {
             cleanup()
