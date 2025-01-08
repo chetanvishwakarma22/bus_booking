@@ -8,6 +8,13 @@
     <artifactId>bus-booking-app</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+    <distributionManagement>
+    <repository>
+        <id>central</id>
+        <name>a0vefa27ck8my-artifactory-primary-0-releases</name>
+        <url>https://trialojibqc.jfrog.io/artifactory/bus_booking-libs-release-local</url>
+    </repository>
+</distributionManagement>
 
     <!-- Parent for Spring Boot -->
     <parent>
